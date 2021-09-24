@@ -8,12 +8,4 @@ import {AuthService} from "./services/auth.service";
 })
 export class AppComponent {
   title = 'TalkBack';
-
-  constructor(private authService: AuthService) {
-
-  }
-
-  public signWithGoogle() {
-    this.authService.signWithGoogle();
-  }
 }
