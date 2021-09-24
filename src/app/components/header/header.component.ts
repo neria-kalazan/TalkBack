@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -9,24 +9,22 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  public isLoggedIn: boolean = false;
+  public isLoggedIn$: Observable<boolean>;
 
   constructor(private authService: AuthService) {
-
+    this.isLoggedIn$ = this.authService.isLoggedIn();
   }
 
-  public signWithGoogle() {
+  public signWithGoogle(): void {
     this.authService.signWithGoogle();
   }
 
-  public signOut() {
+  public signOut(): void {
     this.authService.signOut()
   }
 
   ngOnInit(): void {
-    this.authService.isLoggedIn().subscribe(res => {
-      this.isLoggedIn = res;
-    });
+   
   }
 
 }

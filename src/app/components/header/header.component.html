@@ -2,14 +2,15 @@
   <mat-toolbar color="primary">
     <span>TalkBack</span>
     <span class="header-spacer"></span>
-    <button *ngIf="!isLoggedIn" (click)="signWithGoogle()" mat-icon-button class="header-icon"
-      aria-label="Header icon-button with share icon">
+    <button *ngIf="!(isLoggedIn$ | async); else loggedIn" (click)="signWithGoogle()"
+      mat-icon-button class="header-icon" matTooltip="SignIn">
       <mat-icon>login</mat-icon>
     </button>
-    <button *ngIf="isLoggedIn" (click)="signOut()" mat-icon-button class="header-icon"
-      aria-label="Header icon-button with share icon">
-      <mat-icon>logout</mat-icon>
-    </button>
+    <ng-template #loggedIn>
+      <button (click)="signOut()" mat-icon-button class="header-icon" matTooltip="SignOut">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </ng-template>
   </mat-toolbar>
 
 </div>
