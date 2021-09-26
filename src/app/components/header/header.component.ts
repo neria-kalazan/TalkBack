@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { User } from 'src/app/models/user.interface';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -10,9 +11,17 @@ import { AuthService } from 'src/app/services/auth.service';
 export class HeaderComponent implements OnInit {
 
   public isLoggedIn$: Observable<boolean>;
+  // public userDetails$: Observable<User | undefined>;
+  public userDetails: User | undefined;
 
   constructor(private authService: AuthService) {
     this.isLoggedIn$ = this.authService.isLoggedIn();
+    this.authService.getUserDetails().subscribe(details => {
+      this.userDetails = details;
+      console.log('this.userDetails', this.userDetails);
+    });
+
+
   }
 
   public signWithGoogle(): void {

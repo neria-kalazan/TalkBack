@@ -6,14 +6,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 
-
-
 const modules: any = [
   MatToolbarModule,
   MatButtonModule,
   MatIconModule,
   MatTooltipModule,
-
 
 ];
 

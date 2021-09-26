@@ -1,7 +1,10 @@
 <div class="header">
   <mat-toolbar color="primary">
-    <span>TalkBack</span>
+    <span [routerLink]="['/']">TalkBack</span>
     <span class="header-spacer"></span>
+
+    <span *ngIf="(isLoggedIn$ | async)">Hi, {{ userDetails?.displayName }}</span>
+
     <button *ngIf="!(isLoggedIn$ | async); else loggedIn" (click)="signWithGoogle()"
       mat-icon-button class="header-icon" matTooltip="SignIn">
       <mat-icon>login</mat-icon>
