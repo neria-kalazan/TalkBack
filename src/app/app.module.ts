@@ -16,6 +16,7 @@ import { AddGroupComponent } from './components/chat/add-group/add-group.compone
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ChatRoomComponent } from './components/chat/chat-room/chat-room.component';
+import { AddRoomModalComponent } from './components/modals/add-room-modal/add-room-modal.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ChatRoomComponent } from './components/chat/chat-room/chat-room.compone
     AddGroupComponent,
     HomeComponent,
     NotFoundComponent,
-    ChatRoomComponent
+    ChatRoomComponent,
+    AddRoomModalComponent
   ],
   imports: [
     BrowserModule,

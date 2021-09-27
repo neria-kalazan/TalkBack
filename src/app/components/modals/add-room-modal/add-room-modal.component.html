@@ -1,0 +1,13 @@
+<div class="add-room-modal">
+    <h1 mat-dialog-title>Add Room:</h1>
+    <div mat-dialog-content>
+        <mat-form-field appearance="fill">
+            <mat-label>Room Name</mat-label>
+            <input matInput #roomName>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="close() ">No Thanks</button>
+        <button mat-button [mat-dialog-close]="roomName.value" cdkFocusInitial>Ok</button>
+    </div>
+</div>

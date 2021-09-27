@@ -54,7 +54,7 @@ export class AuthService {
     return this.isLoggedIn$.asObservable()
   }
 
-  public getUserDetails(): Observable<IUser | undefined> {
+  public getUserDetails(): Observable<IUser> {
     return this.userDetails$.asObservable()
   }
 
