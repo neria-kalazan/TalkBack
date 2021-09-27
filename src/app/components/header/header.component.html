@@ -1,6 +1,6 @@
 <div class="header">
   <mat-toolbar color="primary">
-    <span [routerLink]="['/']">TalkBack</span>
+    <span class="header-title" [routerLink]="['/']">TalkBack</span>
     <span class="header-spacer"></span>
 
     <span *ngIf="(isLoggedIn$ | async)">Hi, {{ userDetails?.displayName }}</span>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/compat/firestore";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import * as firebaseAuth from "firebase/auth";
-import {User} from "../models/user.interface";
+import { IUser} from "../models/user.interface";
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
@@ -12,7 +12,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 export class AuthService {
 
   private isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  private userDetails$: Subject<User> = new Subject<User>();
+  private userDetails$: Subject<IUser> = new Subject<IUser>();
 
   constructor(
     private afs: AngularFirestore,
@@ -27,7 +27,7 @@ export class AuthService {
 
     afAuth.authState.subscribe(user => {
       if (!!user) {
-        this.userDetails$.next(<User>user);
+        this.userDetails$.next(<IUser>user);
         const userString: string = JSON.stringify(user);
         localStorage.setItem('user', userString);
         this.isLoggedIn$.next(true);
@@ -54,24 +54,25 @@ export class AuthService {
     return this.isLoggedIn$.asObservable()
   }
 
-  public getUserDetails(): Observable<User | undefined> {
+  public getUserDetails(): Observable<IUser | undefined> {
     return this.userDetails$.asObservable()
   }
 
   private authLogin (provider: firebaseAuth.AuthProvider) {
     return this.afAuth.signInWithPopup(provider).then(res => {
-      console.log(res);
-      this.setUserData(<User> res.user);
+      this.isLoggedIn$.next(true);
+      this.setUserData(<IUser> res.user);
+      this.router.navigate(['chat']);
     })
   }
 
-  private setUserData (user?: User): Promise<void> | void {
+  private setUserData(user?: IUser): Promise<void> | void {
     if (!user) return;
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(
+    const userRef: AngularFirestoreDocument<IUser> = this.afs.doc(
       `user/${user.uid}`
     )
 
-    const userData: User = {
+    const userData: IUser = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,

@@ -1,1 +1,15 @@
-<p>chat works!</p>
+<div class="chat-container">
+    <div class="chat-list" *ngIf="rooms$ | async as rooms">
+        <app-contact-list [rooms]="rooms"></app-contact-list>
+    </div>
+
+    <div class="chat-room" *ngIf="messages$ | async as messages">
+        <app-chat-room [messages]="messages"></app-chat-room>
+    </div>
+
+</div>
+<div class="add-room">
+    <button mat-fab color="primary" matTooltip="Add Group">
+      <mat-icon>add</mat-icon>
+    </button>
+</div>
